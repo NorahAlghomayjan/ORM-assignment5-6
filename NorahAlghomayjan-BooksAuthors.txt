@@ -1,0 +1,59 @@
+from booksAuthors_app.models import *
+
+titles = ['C Sharp', 'Java', 'Python', 'PHP', 'Ruby']
+
+for i in titles:
+    Books.objects.create(title=i)
+
+first = ['Jane', 'Emily', 'Fyodor', 'William', 'Lau']
+last = ['Austen','Dickinson','Dostoevsky','Shakespeare','Tzu']
+
+ for i in range(len(first)):
+    Authors.objects.create(first_name=first[i] , last_name=last[i])
+
+#added a new field called "notes" to Authors class with default value ''
+#python manage.py makemigrations
+#python manage.py migrate
+#python manage.py shell
+
+booksAuthors_app.models import *
+
+bookC = Books.objects.get(title = 'C Sharp')
+bookC.title = 'C#'
+bookC.save()
+
+author4 = Authors.objects.get(id=4)
+author4.first_name = 'Bill'
+author4.save()
+
+author1 = Authors.objects.get(id=1)
+listbook = Books.objects.all()
+
+for i in range(2):
+    listbook.books.add(listbook[i])
+
+author2 = Authors.objects.get(id=2)
+for i in range(3)):
+    author2.books.add(listbook[i])
+
+author3 = Authors.objects.get(id=3)
+for i in range(4)):
+    author4.books.add(listbook[i])
+
+author4 = Authors.objects.get(id=4)
+for i in range(5):
+    author4.books.add(Books.objects.get(id=i+1))
+
+authors3 = listbook[2].authors.all()
+
+listbook[2].authors.remove(authors3[0])
+
+author5 = Authors.objects.get(id=5)
+book2 = Books.objects.get(id=2)
+book2.authors.add(author5)
+
+author3 = Authors.objects.get(id=3)
+author3books = author3.books.all()
+
+book5 = Books.objects.get(id=5)
+book5authors=book3.authors.all()

@@ -1,0 +1,9 @@
+
+table {border: 2px solid black;}
+
+ul {list-style-type:"-   ";}
+
+.btun {
+    width: 100px !important;
+    box-shadow: 3px 3px 2px gray;
+}
