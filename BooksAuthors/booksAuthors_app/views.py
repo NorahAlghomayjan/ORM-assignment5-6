@@ -1,3 +1,4 @@
+from turtle import title
 from django.shortcuts import render , redirect
 
 from .models import Authors , Books
@@ -25,10 +26,11 @@ def addBook(request): #triggred by (add button) on the main page, to add new boo
 #3
 def book(request,id): #triggred by (view link) in the books table to return a detailed info about specific book
     book = Books.objects.get(id=id)
+
+    # Another Way to exclude authors that are already assigned to book..
     bookAuthors = book.authors.all()
     allAuthors = Authors.objects.all()
     authors = []
-
     flag = True
 
     for authora in allAuthors:
@@ -44,12 +46,6 @@ def book(request,id): #triggred by (view link) in the books table to return a de
     'book' : book,
     'authors' : authors}
     return render(request,'book.html',context)
-
-    # context = {
-    # 'book' : Books.objects.get(id=id),
-    # 'authors' : Authors.objects.all()}
-
-    # return render(request,'book.html',context)
 
 #4
 def authors(request): #authors page contains table of all authors + add new author form.
@@ -74,21 +70,8 @@ def addAuthor(request): #triggred by (add button) on the authors page, to add ne
 #6
 def author(request,id): #triggred by (view link) in the authors table to return a detailed info about specific author
     author = Authors.objects.get(id=id)
-    authorBooks = author.books.all()
-    allBooks = Books.objects.all()
-    books = []
-    # books = Books.objects.exclude(authors=authorBooks)
-    # print(books)
-    flag = True
-
-    for booka in allBooks:
-        for authorbook in authorBooks:
-            if authorbook.id == booka.id:
-                flag = False
-                break
-        if flag :
-            books.append(booka)
-        flag = True
+    
+    books = Books.objects.exclude(authors__in = [author])
 
     context = {
     'author' : author,
